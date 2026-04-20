@@ -17,3 +17,9 @@ variable "cluster_admin_arns" {
     "arn:aws:iam::744958734165:user/hilabs-svc-acc"
   ]
 }
+
+variable "environment" {
+  description = "Environment name"
+  default     = "nonprod"
+}
+

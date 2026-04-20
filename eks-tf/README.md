@@ -303,9 +303,18 @@ CREATE S3 BUCKET & DYNAMODB
 
 
 # This moves your local state to S3
-Add backend.tf
+Add backend.tf file
 terraform init -migrate-state
 
+
+# Check state file exists in S3
+aws s3 ls s3://eks-np01-tfstate-744958734165/eks-np01/
+
+# Verify Terraform uses remote state
+terraform state list
+
+# Confirm no local state file remains
+ls -la terraform.tfstate 2>/dev/null || echo "✅ No local state - all in S3!"
 
 
 # Commit current state to git
@@ -324,3 +333,33 @@ aws eks update-nodegroup-config \
 echo "Nodes scaled to 0 - saving cost!"
 
 
+
+
+
+# Ready for Phase 2 — M3: RBAC + Namespaces
+When you're ready just say "start M3" and we'll build:
+rbac.tf      — namespaces, roles, rolebindings
+configmaps.tf — app configs, feature flags
+calico.tf    — network policies
+
+touch rbac.tf configmaps.tf calico.tf kyverno.tf
+terraform init -upgrade
+
+# Save and apply
+terraform plan -out=m3.tfplan
+terraform apply m3.tfplan
+
+# Check namespaces
+kubectl get namespaces
+
+# Check cluster roles
+kubectl get clusterroles | grep eks-
+
+# Check role bindings in app namespace
+kubectl get rolebindings -n app
+
+# Check configmaps
+kubectl get configmaps -n app
+
+# Check service account
+kubectl get sa -n app
