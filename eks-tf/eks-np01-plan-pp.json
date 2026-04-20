@@ -1,0 +1,1106 @@
+{
+    "format_version": "1.2",
+    "terraform_version": "1.14.8",
+    "variables": {
+        "account_id": {
+            "value": "744958734165"
+        },
+        "cluster_name": {
+            "value": "eks-np01"
+        },
+        "region": {
+            "value": "us-east-1"
+        }
+    },
+    "planned_values": {
+        "outputs": {
+            "cluster_arn": {
+                "sensitive": false
+            },
+            "cluster_endpoint": {
+                "sensitive": false
+            },
+            "cluster_name": {
+                "sensitive": false,
+                "type": "string",
+                "value": "eks-np01"
+            },
+            "kubeconfig_command": {
+                "sensitive": false,
+                "type": "string",
+                "value": "aws eks update-kubeconfig --region us-east-1 --name eks-np01"
+            },
+            "node_group_status": {
+                "sensitive": false
+            },
+            "oidc_issuer": {
+                "sensitive": false
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_eks_access_entry.admin",
+                    "mode": "managed",
+                    "type": "aws_eks_access_entry",
+                    "name": "admin",
+                    "provider_name": "registry.terraform.io/hashicorp/aws",
+                    "schema_version": 0,
+                    "values": {
+                        "cluster_name": "eks-np01",
+                        "principal_arn": "arn:aws:iam::744958734165:user/hilabs-svc-acc",
+                        "tags": null,
+                        "timeouts": null,
+                        "type": "STANDARD"
+                    },
+                    "sensitive_values": {
+                        "kubernetes_groups": [],
+                        "tags_all": {}
+                    }
+                },
+                {
+                    "address": "aws_eks_access_policy_association.admin",
+                    "mode": "managed",
+                    "type": "aws_eks_access_policy_association",
+                    "name": "admin",
+                    "provider_name": "registry.terraform.io/hashicorp/aws",
+                    "schema_version": 0,
+                    "values": {
+                        "access_scope": [
+                            {
+                                "namespaces": null,
+                                "type": "cluster"
+                            }
+                        ],
+                        "cluster_name": "eks-np01",
+                        "policy_arn": "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy",
+                        "principal_arn": "arn:aws:iam::744958734165:user/hilabs-svc-acc",
+                        "timeouts": null
+                    },
+                    "sensitive_values": {
+                        "access_scope": [
+                            {}
+                        ]
+                    }
+                },
+                {
+                    "address": "aws_eks_cluster.eks_np01",
+                    "mode": "managed",
+                    "type": "aws_eks_cluster",
+                    "name": "eks_np01",
+                    "provider_name": "registry.terraform.io/hashicorp/aws",
+                    "schema_version": 1,
+                    "values": {
+                        "access_config": [
+                            {
+                                "authentication_mode": "API",
+                                "bootstrap_cluster_creator_admin_permissions": true
+                            }
+                        ],
+                        "bootstrap_self_managed_addons": true,
+                        "compute_config": [],
+                        "enabled_cluster_log_types": [
+                            "api",
+                            "audit",
+                            "authenticator",
+                            "controllerManager",
+                            "scheduler"
+                        ],
+                        "encryption_config": [],
+                        "force_update_version": null,
+                        "kubernetes_network_config": [
+                            {
+                                "ip_family": "ipv4",
+                                "service_ipv4_cidr": "172.20.0.0/16"
+                            }
+                        ],
+                        "name": "eks-np01",
+                        "outpost_config": [],
+                        "remote_network_config": [],
+                        "role_arn": "arn:aws:iam::744958734165:role/eks-np01-cluster-role",
+                        "storage_config": [],
+                        "tags": null,
+                        "timeouts": null,
+                        "upgrade_policy": [
+                            {
+                                "support_type": "EXTENDED"
+                            }
+                        ],
+                        "version": "1.35",
+                        "vpc_config": [
+                            {
+                                "endpoint_private_access": true,
+                                "endpoint_public_access": true,
+                                "public_access_cidrs": [
+                                    "0.0.0.0/0"
+                                ],
+                                "security_group_ids": null,
+                                "subnet_ids": [
+                                    "subnet-0258b00a7ba670609",
+                                    "subnet-038c7766f3576a8db",
+                                    "subnet-0bd74ddf24ebf9730",
+                                    "subnet-0d0a8a9146a421f07"
+                                ]
+                            }
+                        ],
+                        "zonal_shift_config": []
+                    },
+                    "sensitive_values": {
+                        "access_config": [
+                            {}
+                        ],
+                        "certificate_authority": [],
+                        "compute_config": [],
+                        "enabled_cluster_log_types": [
+                            false,
+                            false,
+                            false,
+                            false,
+                            false
+                        ],
+                        "encryption_config": [],
+                        "identity": [],
+                        "kubernetes_network_config": [
+                            {
+                                "elastic_load_balancing": []
+                            }
+                        ],
+                        "outpost_config": [],
+                        "remote_network_config": [],
+                        "storage_config": [],
+                        "tags_all": {},
+                        "upgrade_policy": [
+                            {}
+                        ],
+                        "vpc_config": [
+                            {
+                                "public_access_cidrs": [
+                                    false
+                                ],
+                                "subnet_ids": [
+                                    false,
+                                    false,
+                                    false,
+                                    false
+                                ]
+                            }
+                        ],
+                        "zonal_shift_config": []
+                    }
+                },
+                {
+                    "address": "aws_eks_node_group.bootstrap",
+                    "mode": "managed",
+                    "type": "aws_eks_node_group",
+                    "name": "bootstrap",
+                    "provider_name": "registry.terraform.io/hashicorp/aws",
+                    "schema_version": 0,
+                    "values": {
+                        "ami_type": "AL2023_x86_64_STANDARD",
+                        "capacity_type": "ON_DEMAND",
+                        "cluster_name": "eks-np01",
+                        "disk_size": 20,
+                        "force_update_version": null,
+                        "instance_types": [
+                            "t3.medium"
+                        ],
+                        "labels": {
+                            "bootstrap": "true"
+                        },
+                        "launch_template": [],
+                        "node_group_name": "eks-np01-bootstrap",
+                        "node_role_arn": "arn:aws:iam::744958734165:role/eks-np01-bootstrap-node-role",
+                        "remote_access": [],
+                        "scaling_config": [
+                            {
+                                "desired_size": 1,
+                                "max_size": 2,
+                                "min_size": 1
+                            }
+                        ],
+                        "subnet_ids": [
+                            "subnet-038c7766f3576a8db",
+                            "subnet-0bd74ddf24ebf9730"
+                        ],
+                        "tags": {
+                            "Name": "eks-np01-bootstrap-ng",
+                            "kubernetes.io/cluster/eks-np01": "owned"
+                        },
+                        "tags_all": {
+                            "Name": "eks-np01-bootstrap-ng",
+                            "kubernetes.io/cluster/eks-np01": "owned"
+                        },
+                        "taint": [
+                            {
+                                "effect": "NO_SCHEDULE",
+                                "key": "bootstrap",
+                                "value": "true"
+                            }
+                        ],
+                        "timeouts": null,
+                        "update_config": [
+                            {
+                                "max_unavailable": 1,
+                                "max_unavailable_percentage": null
+                            }
+                        ],
+                        "version": "1.35"
+                    },
+                    "sensitive_values": {
+                        "instance_types": [
+                            false
+                        ],
+                        "labels": {},
+                        "launch_template": [],
+                        "node_repair_config": [],
+                        "remote_access": [],
+                        "resources": [],
+                        "scaling_config": [
+                            {}
+                        ],
+                        "subnet_ids": [
+                            false,
+                            false
+                        ],
+                        "tags": {},
+                        "tags_all": {},
+                        "taint": [
+                            {}
+                        ],
+                        "update_config": [
+                            {}
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_eks_access_entry.admin",
+            "mode": "managed",
+            "type": "aws_eks_access_entry",
+            "name": "admin",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "cluster_name": "eks-np01",
+                    "principal_arn": "arn:aws:iam::744958734165:user/hilabs-svc-acc",
+                    "tags": null,
+                    "timeouts": null,
+                    "type": "STANDARD"
+                },
+                "after_unknown": {
+                    "access_entry_arn": true,
+                    "created_at": true,
+                    "id": true,
+                    "kubernetes_groups": true,
+                    "modified_at": true,
+                    "tags_all": true,
+                    "user_name": true
+                },
+                "before_sensitive": false,
+                "after_sensitive": {
+                    "kubernetes_groups": [],
+                    "tags_all": {}
+                }
+            }
+        },
+        {
+            "address": "aws_eks_access_policy_association.admin",
+            "mode": "managed",
+            "type": "aws_eks_access_policy_association",
+            "name": "admin",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "access_scope": [
+                        {
+                            "namespaces": null,
+                            "type": "cluster"
+                        }
+                    ],
+                    "cluster_name": "eks-np01",
+                    "policy_arn": "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy",
+                    "principal_arn": "arn:aws:iam::744958734165:user/hilabs-svc-acc",
+                    "timeouts": null
+                },
+                "after_unknown": {
+                    "access_scope": [
+                        {}
+                    ],
+                    "associated_at": true,
+                    "id": true,
+                    "modified_at": true
+                },
+                "before_sensitive": false,
+                "after_sensitive": {
+                    "access_scope": [
+                        {}
+                    ]
+                }
+            }
+        },
+        {
+            "address": "aws_eks_cluster.eks_np01",
+            "mode": "managed",
+            "type": "aws_eks_cluster",
+            "name": "eks_np01",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "access_config": [
+                        {
+                            "authentication_mode": "API",
+                            "bootstrap_cluster_creator_admin_permissions": true
+                        }
+                    ],
+                    "bootstrap_self_managed_addons": true,
+                    "compute_config": [],
+                    "enabled_cluster_log_types": [
+                        "api",
+                        "audit",
+                        "authenticator",
+                        "controllerManager",
+                        "scheduler"
+                    ],
+                    "encryption_config": [],
+                    "force_update_version": null,
+                    "kubernetes_network_config": [
+                        {
+                            "ip_family": "ipv4",
+                            "service_ipv4_cidr": "172.20.0.0/16"
+                        }
+                    ],
+                    "name": "eks-np01",
+                    "outpost_config": [],
+                    "remote_network_config": [],
+                    "role_arn": "arn:aws:iam::744958734165:role/eks-np01-cluster-role",
+                    "storage_config": [],
+                    "tags": null,
+                    "timeouts": null,
+                    "upgrade_policy": [
+                        {
+                            "support_type": "EXTENDED"
+                        }
+                    ],
+                    "version": "1.35",
+                    "vpc_config": [
+                        {
+                            "endpoint_private_access": true,
+                            "endpoint_public_access": true,
+                            "public_access_cidrs": [
+                                "0.0.0.0/0"
+                            ],
+                            "security_group_ids": null,
+                            "subnet_ids": [
+                                "subnet-0258b00a7ba670609",
+                                "subnet-038c7766f3576a8db",
+                                "subnet-0bd74ddf24ebf9730",
+                                "subnet-0d0a8a9146a421f07"
+                            ]
+                        }
+                    ],
+                    "zonal_shift_config": []
+                },
+                "after_unknown": {
+                    "access_config": [
+                        {}
+                    ],
+                    "arn": true,
+                    "certificate_authority": true,
+                    "cluster_id": true,
+                    "compute_config": [],
+                    "created_at": true,
+                    "enabled_cluster_log_types": [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                    ],
+                    "encryption_config": [],
+                    "endpoint": true,
+                    "id": true,
+                    "identity": true,
+                    "kubernetes_network_config": [
+                        {
+                            "elastic_load_balancing": true,
+                            "service_ipv6_cidr": true
+                        }
+                    ],
+                    "outpost_config": [],
+                    "platform_version": true,
+                    "remote_network_config": [],
+                    "status": true,
+                    "storage_config": [],
+                    "tags_all": true,
+                    "upgrade_policy": [
+                        {}
+                    ],
+                    "vpc_config": [
+                        {
+                            "cluster_security_group_id": true,
+                            "public_access_cidrs": [
+                                false
+                            ],
+                            "subnet_ids": [
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            "vpc_id": true
+                        }
+                    ],
+                    "zonal_shift_config": []
+                },
+                "before_sensitive": false,
+                "after_sensitive": {
+                    "access_config": [
+                        {}
+                    ],
+                    "certificate_authority": [],
+                    "compute_config": [],
+                    "enabled_cluster_log_types": [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                    ],
+                    "encryption_config": [],
+                    "identity": [],
+                    "kubernetes_network_config": [
+                        {
+                            "elastic_load_balancing": []
+                        }
+                    ],
+                    "outpost_config": [],
+                    "remote_network_config": [],
+                    "storage_config": [],
+                    "tags_all": {},
+                    "upgrade_policy": [
+                        {}
+                    ],
+                    "vpc_config": [
+                        {
+                            "public_access_cidrs": [
+                                false
+                            ],
+                            "subnet_ids": [
+                                false,
+                                false,
+                                false,
+                                false
+                            ]
+                        }
+                    ],
+                    "zonal_shift_config": []
+                }
+            }
+        },
+        {
+            "address": "aws_eks_node_group.bootstrap",
+            "mode": "managed",
+            "type": "aws_eks_node_group",
+            "name": "bootstrap",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "ami_type": "AL2023_x86_64_STANDARD",
+                    "capacity_type": "ON_DEMAND",
+                    "cluster_name": "eks-np01",
+                    "disk_size": 20,
+                    "force_update_version": null,
+                    "instance_types": [
+                        "t3.medium"
+                    ],
+                    "labels": {
+                        "bootstrap": "true"
+                    },
+                    "launch_template": [],
+                    "node_group_name": "eks-np01-bootstrap",
+                    "node_role_arn": "arn:aws:iam::744958734165:role/eks-np01-bootstrap-node-role",
+                    "remote_access": [],
+                    "scaling_config": [
+                        {
+                            "desired_size": 1,
+                            "max_size": 2,
+                            "min_size": 1
+                        }
+                    ],
+                    "subnet_ids": [
+                        "subnet-038c7766f3576a8db",
+                        "subnet-0bd74ddf24ebf9730"
+                    ],
+                    "tags": {
+                        "Name": "eks-np01-bootstrap-ng",
+                        "kubernetes.io/cluster/eks-np01": "owned"
+                    },
+                    "tags_all": {
+                        "Name": "eks-np01-bootstrap-ng",
+                        "kubernetes.io/cluster/eks-np01": "owned"
+                    },
+                    "taint": [
+                        {
+                            "effect": "NO_SCHEDULE",
+                            "key": "bootstrap",
+                            "value": "true"
+                        }
+                    ],
+                    "timeouts": null,
+                    "update_config": [
+                        {
+                            "max_unavailable": 1,
+                            "max_unavailable_percentage": null
+                        }
+                    ],
+                    "version": "1.35"
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "instance_types": [
+                        false
+                    ],
+                    "labels": {},
+                    "launch_template": [],
+                    "node_group_name_prefix": true,
+                    "node_repair_config": true,
+                    "release_version": true,
+                    "remote_access": [],
+                    "resources": true,
+                    "scaling_config": [
+                        {}
+                    ],
+                    "status": true,
+                    "subnet_ids": [
+                        false,
+                        false
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "taint": [
+                        {}
+                    ],
+                    "update_config": [
+                        {}
+                    ]
+                },
+                "before_sensitive": false,
+                "after_sensitive": {
+                    "instance_types": [
+                        false
+                    ],
+                    "labels": {},
+                    "launch_template": [],
+                    "node_repair_config": [],
+                    "remote_access": [],
+                    "resources": [],
+                    "scaling_config": [
+                        {}
+                    ],
+                    "subnet_ids": [
+                        false,
+                        false
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "taint": [
+                        {}
+                    ],
+                    "update_config": [
+                        {}
+                    ]
+                }
+            }
+        }
+    ],
+    "output_changes": {
+        "cluster_arn": {
+            "actions": [
+                "create"
+            ],
+            "before": null,
+            "after_unknown": true,
+            "before_sensitive": false,
+            "after_sensitive": false
+        },
+        "cluster_endpoint": {
+            "actions": [
+                "create"
+            ],
+            "before": null,
+            "after_unknown": true,
+            "before_sensitive": false,
+            "after_sensitive": false
+        },
+        "cluster_name": {
+            "actions": [
+                "create"
+            ],
+            "before": null,
+            "after": "eks-np01",
+            "after_unknown": false,
+            "before_sensitive": false,
+            "after_sensitive": false
+        },
+        "kubeconfig_command": {
+            "actions": [
+                "create"
+            ],
+            "before": null,
+            "after": "aws eks update-kubeconfig --region us-east-1 --name eks-np01",
+            "after_unknown": false,
+            "before_sensitive": false,
+            "after_sensitive": false
+        },
+        "node_group_status": {
+            "actions": [
+                "create"
+            ],
+            "before": null,
+            "after_unknown": true,
+            "before_sensitive": false,
+            "after_sensitive": false
+        },
+        "oidc_issuer": {
+            "actions": [
+                "create"
+            ],
+            "before": null,
+            "after_unknown": true,
+            "before_sensitive": false,
+            "after_sensitive": false
+        }
+    },
+    "prior_state": {
+        "format_version": "1.0",
+        "terraform_version": "1.14.8",
+        "values": {
+            "outputs": {
+                "cluster_name": {
+                    "sensitive": false,
+                    "value": "eks-np01",
+                    "type": "string"
+                },
+                "kubeconfig_command": {
+                    "sensitive": false,
+                    "value": "aws eks update-kubeconfig --region us-east-1 --name eks-np01",
+                    "type": "string"
+                }
+            },
+            "root_module": {
+                "resources": [
+                    {
+                        "address": "data.aws_caller_identity.current",
+                        "mode": "data",
+                        "type": "aws_caller_identity",
+                        "name": "current",
+                        "provider_name": "registry.terraform.io/hashicorp/aws",
+                        "schema_version": 0,
+                        "values": {
+                            "account_id": "744958734165",
+                            "arn": "arn:aws:iam::744958734165:user/hilabs-svc-acc",
+                            "id": "744958734165",
+                            "user_id": "AIDA224YAF5K6H3NQSWHD"
+                        },
+                        "sensitive_values": {}
+                    }
+                ]
+            }
+        }
+    },
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "full_name": "registry.terraform.io/hashicorp/aws",
+                "version_constraint": "~> 5.82",
+                "expressions": {
+                    "region": {
+                        "references": [
+                            "var.region"
+                        ]
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "outputs": {
+                "cluster_arn": {
+                    "expression": {
+                        "references": [
+                            "aws_eks_cluster.eks_np01.arn",
+                            "aws_eks_cluster.eks_np01"
+                        ]
+                    }
+                },
+                "cluster_endpoint": {
+                    "expression": {
+                        "references": [
+                            "aws_eks_cluster.eks_np01.endpoint",
+                            "aws_eks_cluster.eks_np01"
+                        ]
+                    }
+                },
+                "cluster_name": {
+                    "expression": {
+                        "references": [
+                            "aws_eks_cluster.eks_np01.name",
+                            "aws_eks_cluster.eks_np01"
+                        ]
+                    }
+                },
+                "kubeconfig_command": {
+                    "expression": {
+                        "references": [
+                            "aws_eks_cluster.eks_np01.name",
+                            "aws_eks_cluster.eks_np01"
+                        ]
+                    }
+                },
+                "node_group_status": {
+                    "expression": {
+                        "references": [
+                            "aws_eks_node_group.bootstrap.status",
+                            "aws_eks_node_group.bootstrap"
+                        ]
+                    }
+                },
+                "oidc_issuer": {
+                    "expression": {
+                        "references": [
+                            "aws_eks_cluster.eks_np01.identity[0].oidc[0].issuer",
+                            "aws_eks_cluster.eks_np01.identity[0].oidc[0]",
+                            "aws_eks_cluster.eks_np01.identity[0].oidc",
+                            "aws_eks_cluster.eks_np01.identity[0]",
+                            "aws_eks_cluster.eks_np01.identity",
+                            "aws_eks_cluster.eks_np01"
+                        ]
+                    }
+                }
+            },
+            "resources": [
+                {
+                    "address": "aws_eks_access_entry.admin",
+                    "mode": "managed",
+                    "type": "aws_eks_access_entry",
+                    "name": "admin",
+                    "provider_config_key": "aws",
+                    "expressions": {
+                        "cluster_name": {
+                            "references": [
+                                "aws_eks_cluster.eks_np01.name",
+                                "aws_eks_cluster.eks_np01"
+                            ]
+                        },
+                        "principal_arn": {
+                            "references": [
+                                "data.aws_caller_identity.current.arn",
+                                "data.aws_caller_identity.current"
+                            ]
+                        },
+                        "type": {
+                            "constant_value": "STANDARD"
+                        }
+                    },
+                    "schema_version": 0,
+                    "depends_on": [
+                        "aws_eks_cluster.eks_np01"
+                    ]
+                },
+                {
+                    "address": "aws_eks_access_policy_association.admin",
+                    "mode": "managed",
+                    "type": "aws_eks_access_policy_association",
+                    "name": "admin",
+                    "provider_config_key": "aws",
+                    "expressions": {
+                        "access_scope": [
+                            {
+                                "type": {
+                                    "constant_value": "cluster"
+                                }
+                            }
+                        ],
+                        "cluster_name": {
+                            "references": [
+                                "aws_eks_cluster.eks_np01.name",
+                                "aws_eks_cluster.eks_np01"
+                            ]
+                        },
+                        "policy_arn": {
+                            "constant_value": "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+                        },
+                        "principal_arn": {
+                            "references": [
+                                "data.aws_caller_identity.current.arn",
+                                "data.aws_caller_identity.current"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "depends_on": [
+                        "aws_eks_access_entry.admin"
+                    ]
+                },
+                {
+                    "address": "aws_eks_cluster.eks_np01",
+                    "mode": "managed",
+                    "type": "aws_eks_cluster",
+                    "name": "eks_np01",
+                    "provider_config_key": "aws",
+                    "expressions": {
+                        "access_config": [
+                            {
+                                "authentication_mode": {
+                                    "constant_value": "API"
+                                },
+                                "bootstrap_cluster_creator_admin_permissions": {
+                                    "constant_value": true
+                                }
+                            }
+                        ],
+                        "enabled_cluster_log_types": {
+                            "constant_value": [
+                                "api",
+                                "audit",
+                                "authenticator",
+                                "controllerManager",
+                                "scheduler"
+                            ]
+                        },
+                        "kubernetes_network_config": [
+                            {
+                                "ip_family": {
+                                    "constant_value": "ipv4"
+                                },
+                                "service_ipv4_cidr": {
+                                    "constant_value": "172.20.0.0/16"
+                                }
+                            }
+                        ],
+                        "name": {
+                            "constant_value": "eks-np01"
+                        },
+                        "role_arn": {
+                            "constant_value": "arn:aws:iam::744958734165:role/eks-np01-cluster-role"
+                        },
+                        "tags": {
+                            "constant_value": {}
+                        },
+                        "upgrade_policy": [
+                            {
+                                "support_type": {
+                                    "constant_value": "EXTENDED"
+                                }
+                            }
+                        ],
+                        "version": {
+                            "constant_value": "1.35"
+                        },
+                        "vpc_config": [
+                            {
+                                "endpoint_private_access": {
+                                    "constant_value": true
+                                },
+                                "endpoint_public_access": {
+                                    "constant_value": true
+                                },
+                                "public_access_cidrs": {
+                                    "constant_value": [
+                                        "0.0.0.0/0"
+                                    ]
+                                },
+                                "subnet_ids": {
+                                    "constant_value": [
+                                        "subnet-0bd74ddf24ebf9730",
+                                        "subnet-038c7766f3576a8db",
+                                        "subnet-0d0a8a9146a421f07",
+                                        "subnet-0258b00a7ba670609"
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "schema_version": 1
+                },
+                {
+                    "address": "aws_eks_node_group.bootstrap",
+                    "mode": "managed",
+                    "type": "aws_eks_node_group",
+                    "name": "bootstrap",
+                    "provider_config_key": "aws",
+                    "expressions": {
+                        "ami_type": {
+                            "constant_value": "AL2023_x86_64_STANDARD"
+                        },
+                        "capacity_type": {
+                            "constant_value": "ON_DEMAND"
+                        },
+                        "cluster_name": {
+                            "references": [
+                                "aws_eks_cluster.eks_np01.name",
+                                "aws_eks_cluster.eks_np01"
+                            ]
+                        },
+                        "disk_size": {
+                            "constant_value": 20
+                        },
+                        "instance_types": {
+                            "constant_value": [
+                                "t3.medium"
+                            ]
+                        },
+                        "labels": {
+                            "constant_value": {
+                                "bootstrap": "true"
+                            }
+                        },
+                        "node_group_name": {
+                            "constant_value": "eks-np01-bootstrap"
+                        },
+                        "node_role_arn": {
+                            "constant_value": "arn:aws:iam::744958734165:role/eks-np01-bootstrap-node-role"
+                        },
+                        "scaling_config": [
+                            {
+                                "desired_size": {
+                                    "constant_value": 1
+                                },
+                                "max_size": {
+                                    "constant_value": 2
+                                },
+                                "min_size": {
+                                    "constant_value": 1
+                                }
+                            }
+                        ],
+                        "subnet_ids": {
+                            "constant_value": [
+                                "subnet-038c7766f3576a8db",
+                                "subnet-0bd74ddf24ebf9730"
+                            ]
+                        },
+                        "tags": {
+                            "constant_value": {
+                                "Name": "eks-np01-bootstrap-ng",
+                                "kubernetes.io/cluster/eks-np01": "owned"
+                            }
+                        },
+                        "taint": [
+                            {
+                                "effect": {
+                                    "constant_value": "NO_SCHEDULE"
+                                },
+                                "key": {
+                                    "constant_value": "bootstrap"
+                                },
+                                "value": {
+                                    "constant_value": "true"
+                                }
+                            }
+                        ],
+                        "update_config": [
+                            {
+                                "max_unavailable": {
+                                    "constant_value": 1
+                                }
+                            }
+                        ],
+                        "version": {
+                            "constant_value": "1.35"
+                        }
+                    },
+                    "schema_version": 0,
+                    "depends_on": [
+                        "aws_eks_cluster.eks_np01"
+                    ]
+                },
+                {
+                    "address": "data.aws_caller_identity.current",
+                    "mode": "data",
+                    "type": "aws_caller_identity",
+                    "name": "current",
+                    "provider_config_key": "aws",
+                    "schema_version": 0
+                }
+            ],
+            "variables": {
+                "account_id": {
+                    "default": "744958734165"
+                },
+                "cluster_name": {
+                    "default": "eks-np01"
+                },
+                "region": {
+                    "default": "us-east-1"
+                }
+            }
+        }
+    },
+    "relevant_attributes": [
+        {
+            "resource": "data.aws_caller_identity.current",
+            "attribute": [
+                "arn"
+            ]
+        },
+        {
+            "resource": "aws_eks_cluster.eks_np01",
+            "attribute": [
+                "arn"
+            ]
+        },
+        {
+            "resource": "aws_eks_cluster.eks_np01",
+            "attribute": [
+                "endpoint"
+            ]
+        },
+        {
+            "resource": "aws_eks_cluster.eks_np01",
+            "attribute": [
+                "identity",
+                0,
+                "oidc",
+                0,
+                "issuer"
+            ]
+        },
+        {
+            "resource": "aws_eks_cluster.eks_np01",
+            "attribute": [
+                "name"
+            ]
+        },
+        {
+            "resource": "aws_eks_node_group.bootstrap",
+            "attribute": [
+                "status"
+            ]
+        }
+    ],
+    "timestamp": "2026-04-20T00:25:53Z",
+    "applyable": true,
+    "complete": true,
+    "errored": false
+}

@@ -1,0 +1,155 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # aws_eks_access_entry.admin[0m will be created
+[0m  [32m+[0m[0m resource "aws_eks_access_entry" "admin" {
+      [32m+[0m[0m access_entry_arn  = (known after apply)
+      [32m+[0m[0m cluster_name      = "eks-np01"
+      [32m+[0m[0m created_at        = (known after apply)
+      [32m+[0m[0m id                = (known after apply)
+      [32m+[0m[0m kubernetes_groups = (known after apply)
+      [32m+[0m[0m modified_at       = (known after apply)
+      [32m+[0m[0m principal_arn     = "arn:aws:iam::744958734165:user/hilabs-svc-acc"
+      [32m+[0m[0m tags_all          = (known after apply)
+      [32m+[0m[0m type              = "STANDARD"
+      [32m+[0m[0m user_name         = (known after apply)
+    }
+
+[1m  # aws_eks_access_policy_association.admin[0m will be created
+[0m  [32m+[0m[0m resource "aws_eks_access_policy_association" "admin" {
+      [32m+[0m[0m associated_at = (known after apply)
+      [32m+[0m[0m cluster_name  = "eks-np01"
+      [32m+[0m[0m id            = (known after apply)
+      [32m+[0m[0m modified_at   = (known after apply)
+      [32m+[0m[0m policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+      [32m+[0m[0m principal_arn = "arn:aws:iam::744958734165:user/hilabs-svc-acc"
+
+      [32m+[0m[0m access_scope {
+          [32m+[0m[0m type = "cluster"
+        }
+    }
+
+[1m  # aws_eks_cluster.eks_np01[0m will be created
+[0m  [32m+[0m[0m resource "aws_eks_cluster" "eks_np01" {
+      [32m+[0m[0m arn                           = (known after apply)
+      [32m+[0m[0m bootstrap_self_managed_addons = true
+      [32m+[0m[0m certificate_authority         = (known after apply)
+      [32m+[0m[0m cluster_id                    = (known after apply)
+      [32m+[0m[0m created_at                    = (known after apply)
+      [32m+[0m[0m enabled_cluster_log_types     = [
+          [32m+[0m[0m "api",
+          [32m+[0m[0m "audit",
+          [32m+[0m[0m "authenticator",
+          [32m+[0m[0m "controllerManager",
+          [32m+[0m[0m "scheduler",
+        ]
+      [32m+[0m[0m endpoint                      = (known after apply)
+      [32m+[0m[0m id                            = (known after apply)
+      [32m+[0m[0m identity                      = (known after apply)
+      [32m+[0m[0m name                          = "eks-np01"
+      [32m+[0m[0m platform_version              = (known after apply)
+      [32m+[0m[0m role_arn                      = "arn:aws:iam::744958734165:role/eks-np01-cluster-role"
+      [32m+[0m[0m status                        = (known after apply)
+      [32m+[0m[0m tags_all                      = (known after apply)
+      [32m+[0m[0m version                       = "1.35"
+
+      [32m+[0m[0m access_config {
+          [32m+[0m[0m authentication_mode                         = "API"
+          [32m+[0m[0m bootstrap_cluster_creator_admin_permissions = true
+        }
+
+      [32m+[0m[0m kubernetes_network_config {
+          [32m+[0m[0m ip_family         = "ipv4"
+          [32m+[0m[0m service_ipv4_cidr = "172.20.0.0/16"
+          [32m+[0m[0m service_ipv6_cidr = (known after apply)
+
+          [32m+[0m[0m elastic_load_balancing (known after apply)
+        }
+
+      [32m+[0m[0m upgrade_policy {
+          [32m+[0m[0m support_type = "EXTENDED"
+        }
+
+      [32m+[0m[0m vpc_config {
+          [32m+[0m[0m cluster_security_group_id = (known after apply)
+          [32m+[0m[0m endpoint_private_access   = true
+          [32m+[0m[0m endpoint_public_access    = true
+          [32m+[0m[0m public_access_cidrs       = [
+              [32m+[0m[0m "0.0.0.0/0",
+            ]
+          [32m+[0m[0m subnet_ids                = [
+              [32m+[0m[0m "subnet-0258b00a7ba670609",
+              [32m+[0m[0m "subnet-038c7766f3576a8db",
+              [32m+[0m[0m "subnet-0bd74ddf24ebf9730",
+              [32m+[0m[0m "subnet-0d0a8a9146a421f07",
+            ]
+          [32m+[0m[0m vpc_id                    = (known after apply)
+        }
+    }
+
+[1m  # aws_eks_node_group.bootstrap[0m will be created
+[0m  [32m+[0m[0m resource "aws_eks_node_group" "bootstrap" {
+      [32m+[0m[0m ami_type               = "AL2023_x86_64_STANDARD"
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m capacity_type          = "ON_DEMAND"
+      [32m+[0m[0m cluster_name           = "eks-np01"
+      [32m+[0m[0m disk_size              = 20
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m instance_types         = [
+          [32m+[0m[0m "t3.medium",
+        ]
+      [32m+[0m[0m labels                 = {
+          [32m+[0m[0m "bootstrap" = "true"
+        }
+      [32m+[0m[0m node_group_name        = "eks-np01-bootstrap"
+      [32m+[0m[0m node_group_name_prefix = (known after apply)
+      [32m+[0m[0m node_role_arn          = "arn:aws:iam::744958734165:role/eks-np01-bootstrap-node-role"
+      [32m+[0m[0m release_version        = (known after apply)
+      [32m+[0m[0m resources              = (known after apply)
+      [32m+[0m[0m status                 = (known after apply)
+      [32m+[0m[0m subnet_ids             = [
+          [32m+[0m[0m "subnet-038c7766f3576a8db",
+          [32m+[0m[0m "subnet-0bd74ddf24ebf9730",
+        ]
+      [32m+[0m[0m tags                   = {
+          [32m+[0m[0m "Name"                           = "eks-np01-bootstrap-ng"
+          [32m+[0m[0m "kubernetes.io/cluster/eks-np01" = "owned"
+        }
+      [32m+[0m[0m tags_all               = {
+          [32m+[0m[0m "Name"                           = "eks-np01-bootstrap-ng"
+          [32m+[0m[0m "kubernetes.io/cluster/eks-np01" = "owned"
+        }
+      [32m+[0m[0m version                = "1.35"
+
+      [32m+[0m[0m node_repair_config (known after apply)
+
+      [32m+[0m[0m scaling_config {
+          [32m+[0m[0m desired_size = 1
+          [32m+[0m[0m max_size     = 2
+          [32m+[0m[0m min_size     = 1
+        }
+
+      [32m+[0m[0m taint {
+          [32m+[0m[0m effect = "NO_SCHEDULE"
+          [32m+[0m[0m key    = "bootstrap"
+          [32m+[0m[0m value  = "true"
+        }
+
+      [32m+[0m[0m update_config {
+          [32m+[0m[0m max_unavailable = 1
+        }
+    }
+
+[1mPlan:[0m [0m4 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  [32m+[0m[0m cluster_arn        = (known after apply)
+  [32m+[0m[0m cluster_endpoint   = (known after apply)
+  [32m+[0m[0m cluster_name       = "eks-np01"
+  [32m+[0m[0m kubeconfig_command = "aws eks update-kubeconfig --region us-east-1 --name eks-np01"
+  [32m+[0m[0m node_group_status  = (known after apply)
+  [32m+[0m[0m oidc_issuer        = (known after apply)
