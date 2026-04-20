@@ -363,3 +363,59 @@ kubectl get configmaps -n app
 
 # Check service account
 kubectl get sa -n app
+
+
+
+# M4 install kyverno, then add policies
+add kyverno.tf
+add providers like helm in providers.tf
+
+terraform init -upgrade # use when there is change in version for providers
+terraform plan
+
+terraform init -reconfigure # changign backend use lock file instead dynamodb
+
+# Apply only kyverno helm release first - install / upgrade kyverno so that its availble for rest all poliicies
+terraform apply -target=helm_release.kyverno
+watch kubectl get pods -n kyverno
+Wait until all 4 pods show Running then run:
+
+
+
+terraform plan -out=m4.tfplan
+terraform apply m4.tfplan
+watch kubectl get pods -n kyverno
+
+
+# See all available chart versions
+helm repo add kyverno https://kyverno.github.io/kyverno
+helm repo update
+helm search repo kyverno/kyverno --versions | head -20
+
+
+
+
+# Browse official policy library
+helm repo add kyverno-policies https://kyverno.github.io/kyverno
+helm repo update
+helm search repo kyverno-policies/kyverno --versions | head -20
+
+terraform plan -target=helm_release.kyverno_policies
+terraform apply -target=helm_release.kyverno_policies
+
+# Verify policies installed
+kubectl get clusterpolicies | head -30
+
+# Check cluster-wide violations
+kubectl get clusterpolicyreport -A
+
+# Check namespace violations
+kubectl get policyreport -n app
+
+# Detailed violation report
+kubectl describe clusterpolicyreport | grep -A5 "fail"
+
+# Count violations per policy
+kubectl get clusterpolicyreport -o json | \
+  python3 -m json.tool | \
+  grep "policy\|result" | head -40
